@@ -1,4 +1,5 @@
 import re
+from operator import index
 
 from playwright.sync_api import Page, expect
 

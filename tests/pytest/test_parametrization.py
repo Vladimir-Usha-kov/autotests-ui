@@ -1,8 +1,6 @@
 import pytest
 from _pytest.fixtures import SubRequest
 
-from playwright_registration_or_save_jwt_token import username_input
-
 
 @pytest.mark.parametrize('numbers', [1, 2, 3, -1])
 def test_numbers(numbers: int):

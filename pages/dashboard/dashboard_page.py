@@ -3,7 +3,7 @@ from components.dashboard.dashboard_toolbar_view_component import DashboardToolb
 from components.navigation.navbar_component import NavbarComponent
 from components.navigation.sidebar_components import SideBarComponents
 from pages.base_page import BasePage
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 class DashboardPage(BasePage):
     def __init__(self, page: Page):
