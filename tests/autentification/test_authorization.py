@@ -2,6 +2,8 @@ import time
 
 import allure
 import pytest
+from allure_commons.types import Severity
+
 from pages.autentification.login_page import LoginPage
 from pages.autentification.registration_page import RegistrationPage
 from pages.dashboard.dashboard_page import DashboardPage
@@ -17,10 +19,14 @@ from utils.allure.tags import AllureTag
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeatures.AUTHENTICATION)
 @allure.story(AllureStory.AUTHORIZATION)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeatures.AUTHENTICATION)
+@allure.sub_suite(AllureStory.AUTHORIZATION)
 class TestAuthorization:
     @pytest.mark.parametrize('email, password',
                              [('user.name@gmail.com', 'password'), ('user.name@gmail.com', '  '), ('  ', 'password')])
     @allure.title('User login with wrong email or password')
+    @allure.severity(Severity.CRITICAL)
     def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str, password: str):
         login_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login')
         login_page.login_component.fill(email, password)
@@ -28,6 +34,7 @@ class TestAuthorization:
         login_page.click_button()
         login_page.check_visible_alert()
 
+    @allure.severity(Severity.BLOCKER)
     @allure.title('User login with correct email and password')
     def test_successful_authorization(self, registration_page: RegistrationPage,
                                       login_page: LoginPage,
@@ -45,6 +52,7 @@ class TestAuthorization:
         dashboard_page.navbar.check_visible(username='test')
 
     @allure.title('Navigation from login page to registration page')
+    @allure.severity(Severity.NORMAL)
     def test_navigate_from_authorization_to_registration(self,
                                                          login_page: LoginPage,
                                                          registration_page: RegistrationPage):

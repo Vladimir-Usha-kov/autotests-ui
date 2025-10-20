@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page, expect
 
 from components.base_components import BaseComponent
@@ -20,6 +21,7 @@ class CourseViewComponent(BaseComponent):
         self.course_min_score_text = Text(page, 'course-min-score-info-row-view-text', 'Min score')
         self.course_estimated_time_text = Text(page, 'course-estimated-time-info-row-view-text', 'estimated-time')
 
+    @allure.step('Check visible course card "{params.index}"')
     def check_visible_card(self, params: CheckVisibleCourseCardParams):
         self.course_image.check_visible(nth=params.index)
 

@@ -1,5 +1,7 @@
 import allure
 import pytest
+from allure_commons.types import Severity
+
 from fixtures.pages import dashboard_page
 from pages.dashboard.dashboard_page import DashboardPage
 from pages.autentification.registration_page import RegistrationPage
@@ -15,8 +17,12 @@ from utils.allure.tags import AllureTag
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeatures.AUTHENTICATION)
 @allure.story(AllureStory.REGISTRATION)
+@allure.suite(AllureFeatures.AUTHENTICATION)
+@allure.sub_suite(AllureStory.REGISTRATION)
+@allure.parent_suite(AllureEpic.LMS)
 class TestRegistration:
         @allure.title('Registration with correct email, username and password')
+        @allure.severity(Severity.CRITICAL)
         def test_successful_registration(self, registration_page: RegistrationPage, dashboard_page: DashboardPage):
                 registration_page.visit(
                         'https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')

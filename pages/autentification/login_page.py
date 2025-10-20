@@ -1,5 +1,7 @@
 import re
 
+import allure
+
 from components.authentication.login_form_component import LogonFormComponent
 from elements.button import Button
 from elements.link import Link
@@ -27,6 +29,7 @@ class LoginPage(BasePage):
         self.registration_link.click()
         self.check_url(re.compile('.*/#/auth/registration'))
 
+    @allure.step('Check visible alert wrong email and wrong password')
     def check_visible_alert(self):
         self.wrong_email_or_password_alert.check_visible()
         self.wrong_email_or_password_alert.check_have_text('Wrong email or password')
