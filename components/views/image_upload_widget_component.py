@@ -14,7 +14,6 @@ class ImageUploadWidgetComponent(BaseComponent):
     def __init__(self, page: Page, identifier: str):
         super().__init__(page)
         self.empty_view_component = EmptyViewComponent(page, identifier)
-
         self.preview_image = Image(page,f'{identifier}-image-upload-widget-preview-image', 'Image')
 
         self.image_upload_icon = Icon(page,f'{identifier}-image-upload-widget-info-icon', 'Icon')
@@ -51,7 +50,6 @@ class ImageUploadWidgetComponent(BaseComponent):
 
     def click_remove_image_button(self):
         self.button_remove.click()
-
 
     def upload_preview_image(self, file: str):
         self.upload_input.set_input_file(file)

@@ -2,7 +2,7 @@ import time
 import allure
 import pytest
 from allure_commons.types import Severity
-
+from config import settings
 from data.data import CourseCardFormParams, CheckVisibleCourseCardParams
 from pages.courses.courses_list_page import CoursesListPage
 from pages.courses.create_course_page import CreateCoursePage
@@ -10,6 +10,7 @@ from utils.allure.epics import AllureEpic
 from utils.allure.features import AllureFeatures
 from utils.allure.stories import AllureStory
 from utils.allure.tags import AllureTag
+from utils.routes import AppRoute
 
 
 @pytest.mark.courses
@@ -36,7 +37,7 @@ class TestCourses:
     @allure.severity(Severity.CRITICAL)
     @allure.title('Create course')
     def test_create_course(self, create_courses_page: CreateCoursePage, courses_list_page: CoursesListPage):
-        create_courses_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
+        create_courses_page.visit(AppRoute.CREATE_COURSES)
         create_courses_page.create_course_toolbar.check_visible(is_disabled_button=True)
         create_courses_page.image_upload_widget.check_visible_image_upload_view(is_image_uploaded=False)
         create_courses_page.create_course_form.check_visible(
@@ -45,7 +46,7 @@ class TestCourses:
         create_courses_page.create_exercises_toolbar.check_visible()
         create_courses_page.check_visible_exercises_empty_view()
 
-        create_courses_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_courses_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_courses_page.image_upload_widget.check_visible_image_upload_view(is_image_uploaded=True)
 
         create_courses_page.create_course_form.fill(
@@ -68,8 +69,8 @@ class TestCourses:
     @allure.title('Edit course')
     @allure.severity(Severity.CRITICAL)
     def test_edit_course(self, create_courses_page: CreateCoursePage, courses_list_page: CoursesListPage):
-        create_courses_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
-        create_courses_page.image_upload_widget.upload_preview_image('./testdata/files/image.png')
+        create_courses_page.visit(AppRoute.CREATE_COURSES)
+        create_courses_page.image_upload_widget.upload_preview_image(settings.test_data.image_png_file)
         create_courses_page.image_upload_widget.check_visible_image_upload_view(is_image_uploaded=True)
         create_courses_page.create_course_form.fill(
             CourseCardFormParams(title='Playwright', description='Playwright', estimated_time='2 weeks',

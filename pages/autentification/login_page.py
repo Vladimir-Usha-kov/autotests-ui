@@ -24,7 +24,6 @@ class LoginPage(BasePage):
     def click_button(self):
         self.login_button.click()
 
-
     def click_registration_link(self):
         self.registration_link.click()
         self.check_url(re.compile('.*/#/auth/registration'))
