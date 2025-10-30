@@ -1,16 +1,14 @@
-import dataclasses
-from dataclasses import dataclass
+from pydantic import BaseModel
 
-@dataclass
-class CheckVisibleCourseCardParams:
+
+class CheckVisibleCourseCardParams(BaseModel):
     index: int
     title: str
     max_score: str
     min_score: str
     estimated_time: str
 
-@dataclass
-class CourseCardFormParams:
+class CourseCardFormParams(BaseModel):
     title: str
     estimated_time: str
     description: str
