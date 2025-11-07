@@ -1,21 +1,28 @@
 from re import Pattern
-
+from utils.logger import get_logger
 import allure
 from playwright.sync_api import Page, expect
 
+logger = get_logger('Base page')
 
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
 
     def visit(self, url: str):
-        with allure.step(f'Opening the url {url}'):
+        step = f'Opening the url {url}'
+        with allure.step(step):
+            logger.info(step)
             self.page.goto(url, wait_until='networkidle')
 
     def reload(self):
-        with allure.step(f'Reloading page with url "{self.page.url}"'):
+        step = f'Reloading page with url "{self.page.url}"'
+        with allure.step(step):
+            logger.info(step)
             self.page.reload(wait_until='domcontentloaded')
 
     def check_url(self, expected_url: Pattern[str] ):
-        with allure.step(f'Checking that current url match pattern "{expected_url.pattern}"'):
+        step = f'Checking that current url match pattern "{expected_url.pattern}"'
+        with allure.step(step):
+            logger.info(step)
             expect(self.page).to_have_url(expected_url)
