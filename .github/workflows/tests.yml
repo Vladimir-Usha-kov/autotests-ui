@@ -55,7 +55,7 @@ jobs:
           path: gh-pages
 
       - name: Download Artefact
-        uses: action/download-artefact@v4
+        uses: action/download-artifact@v4
         with:
           name: allure-results
           path: allure-results
