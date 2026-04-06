@@ -28,5 +28,5 @@ def create_courses_page(page_with_state: Page) -> CreateCoursePage:
     return CreateCoursePage(page=page_with_state)
 
 @pytest.fixture
-def dashboard_page_with_state(page_with_state: Page) -> DashboardPage:
+def dashboard_page_with_state(page_with_state: Page) -> [DashboardPage]:
     return DashboardPage(page=page_with_state)

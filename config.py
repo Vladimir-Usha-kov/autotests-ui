@@ -3,7 +3,7 @@ import os
 from enum import Enum
 from typing import Self
 
-from pydantic import EmailStr, FilePath, HttpUrl, DirectoryPath, Field, BaseModel
+from pydantic import EmailStr, FilePath, HttpUrl, DirectoryPath, BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -42,6 +42,7 @@ class Settings(BaseSettings):
     tracing_dir: DirectoryPath
     allure_results_dir: DirectoryPath
     browser_state_file: FilePath
+    browser_erp_state_file: FilePath
 
     def get_base_url(self):
         return f'{self.app_url}/'
